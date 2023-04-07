@@ -1,6 +1,13 @@
+import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import utilities.TestBase;
 
-public class C02_060423 {
+import java.util.Arrays;
+
+public class C02_060423 extends TestBase {
     /*
     --Utilities package'da TestBase class'i olusturuldu. Orada ki methodlar incelenip kullanilabilir. 
     --@Test ile Junit Framework'ünde  testlerimizi yapacagiz.
@@ -200,46 +207,64 @@ public class C02_060423 {
          */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
-    @Test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @Test
     public void remziyeTest() { //232-272
-        /*
-        2- https://www.google.com/ adresine gidin
-        3- cookies uyarisini kabul ederek kapatin
-        4.Sayfa basliginin “Google” ifadesi icerdigini test edin
-        5. Arama cubuguna “Nutella” yazip aratin
-        6. Bulunan sonuc sayisini yazdirin
-        7. sonuc sayisinin 10 milyon’dan fazla oldugunu test edin
-        8. Sayfayi kapatin
-         */
+    /*      1- https://www.google.com/ adresine gidin
+            2- cookies uyarisini kabul ederek kapatin
+            3.Sayfa basliginin “Google” ifadesi icerdigini test edin
+            4. Arama cubuguna “Nutella” yazip aratin
+            5. Bulunan sonuc sayisini yazdirin
+            6. sonuc sayisinin 10 milyon’dan fazla oldugunu test edin
+
+            */
+
+            //      1- https://www.google.com/ adresine gidin
+            driver.get("https://www.google.com/");
+            //      2- cookies uyarisini kabul ederek kapatin
+            driver.findElement(By.xpath("//*[text()='Alle ablehnen']")).click();
+            //      3.Sayfa basliginin “Google” ifadesi icerdigini test edin
+            String actualTitle = driver.getTitle();
+            Assert.assertTrue(actualTitle.contains("Google"));
+            //       4. Arama cubuguna “Nutella” yazip aratin
+            WebElement aramaKutusu = driver.findElement(By.xpath("//*[@name ='q']"));
+            aramaKutusu.sendKeys("nutella" + Keys.ENTER);
+            //     5. Bulunan sonuc sayisini yazdirin
+            String sonucYazisi = driver.
+                    findElement(By.xpath("//div[@id ='result-stats']")).getText();
+            System.out.println("sonucYazisi = " + sonucYazisi);
+
+//       6. sonuc sayisinin 10 milyon’dan fazla oldugunu test edin
+            sonucYazisi = sonucYazisi.split(" ")[1];
+            sonucYazisi = sonucYazisi.replaceAll("\\D", "");
+            System.out.println("noktasiz String sonuc" + sonucYazisi);//noktalar sorun olusturur karsilastirmada yokettik
+            int sonuc = Integer.parseInt(sonucYazisi);
+            System.out.println("int'e dönusmus sonuc; " + sonuc);
+            Assert.assertTrue(sonuc > 10000000);
+
+        }
 
 
 
@@ -269,7 +294,10 @@ public class C02_060423 {
 
 
 
-    }
+
+
+
+
 
     @Test
     public void kübraTest() { //274-316
