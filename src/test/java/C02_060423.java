@@ -1,13 +1,16 @@
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import utilities.TestBase;
 
 import java.time.Duration;
+import java.util.List;
 
 public class C02_060423 extends TestBase {
     /*
@@ -38,17 +41,12 @@ public class C02_060423 extends TestBase {
         5. “Add/Remove Elements” yazisinin gorunur oldugunu test edin
          */
 
-
-
-
-
-
-
-
-
-
-
-
+        driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
+        driver.findElement(By.xpath("//button[@onclick='addElement()']")).click();
+        WebElement delete=driver.findElement(By.xpath("//button[@class='added-manually']"));
+        Assert.assertTrue(delete.isDisplayed());
+        delete.click();
+        Assert.assertTrue(driver.findElement(By.xpath("//h3")).isDisplayed());
 
 
 
