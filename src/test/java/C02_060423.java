@@ -1,4 +1,11 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.time.Duration;
 
 public class C02_060423 {
     /*
@@ -50,44 +57,37 @@ public class C02_060423 {
 
 
 
-
-
-
-
-
-
-
     }
 
     @Test
     public void MustafaTest() { //62-103
-        /*
-        2- https://www.amazon.com/ adresine gidin 3- Browseri tam sayfa yapin
-        4.- Sayfayi “refresh” yapin
-        5. Sayfa basliginin “Spend less” ifadesi icerdigini test edin
-        6. Gift Cards sekmesine basin
-        7. Birthday butonuna basin
-        8. Best Seller bolumunden ilk urunu tiklayin
-        9. Gift card details’den 25 $’i secin
-        10-Urun ucretinin 25$ oldugunu test edin 10-Sayfayi kapatin
-         */
 
+//
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        //2- https://www.amazon.com/ adresine gidin
+        driver.get("https://www.amazon.com/");
+        // 3- Browseri tam sayfa yapin
+        driver.manage().window().maximize();
+//        4.- Sayfayi “refresh” yapin
+      driver.navigate().refresh();
+//        5. Sayfa basliginin “Spend less” ifadesi icerdigini test edin
+      boolean title=  driver.getTitle().contains("Spend less");
+        Assert.assertTrue(title);
+      //        6. Gift Cards sekmesine basin
+        driver.findElement(By.xpath("(//a[@class='nav-a  '])[4]")).click();
+//        7. Birthday butonuna basin
+        driver.findElement(By.xpath("//img[@alt='Birthday']")).click();
+//        8. Best Seller bolumunden ilk urunu tiklayin
+        driver.findElement(By.xpath("(//span[@class='a-truncate a-size-base'])[1]")).click();
+//        9. Gift card details’den 25 $’i secin
+        driver.findElement(By.xpath("//button[@id='gc-mini-picker-amount-1']")).click();
+//        10-Urun ucretinin 25$ oldugunu test edin 10-Sayfayi kapatin
+        String price=   driver.findElement(By.xpath("//*[@id='gc-live-preview-amount']")).getText();
+        Assert.assertTrue(price.contains("$25"));
+        driver.close();
 
 
 
