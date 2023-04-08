@@ -41,17 +41,12 @@ public class C02_060423 extends TestBase {
         5. “Add/Remove Elements” yazisinin gorunur oldugunu test edin
          */
 
-
-
-
-
-
-
-
-
-
-
-
+        driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
+        driver.findElement(By.xpath("//button[@onclick='addElement()']")).click();
+        WebElement delete=driver.findElement(By.xpath("//button[@class='added-manually']"));
+        Assert.assertTrue(delete.isDisplayed());
+        delete.click();
+        Assert.assertTrue(driver.findElement(By.xpath("//h3")).isDisplayed());
 
 
 
