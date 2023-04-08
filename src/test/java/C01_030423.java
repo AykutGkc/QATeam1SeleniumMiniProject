@@ -61,6 +61,16 @@ remziyeMethod();
     public static void gulMethod() { //62 - 92
         //Amazon.com sayfasina gidiniz. bike aramasi yaptiriniz. Cikan sonuc sayisini konsola yazdiriniz.
 
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.get("https://amazon.com");
+        WebElement searchBox = driver.findElement(By.xpath("//*[@id='twotabsearchtextbox']"));
+        searchBox.sendKeys("bike",Keys.ENTER);
+        String a=driver.findElement(By.xpath("//span[text()='1-16 von mehr als 100.000 Ergebnissen oder Vorschlägen für']")).getText();
+        System.out.println(a.split(" ")[4]);
+        driver.close();
 
 
 
