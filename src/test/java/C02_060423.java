@@ -320,7 +320,7 @@ public class C02_060423 extends TestBase {
 
 
     @Test
-    public void kübraTest() { //274-316
+    public void kübraTest() throws InterruptedException { //274-316
         /*
         1.“https://www.saucedemo.com” Adresine gidin
         2. Username kutusuna “standard_user” yazdirin
@@ -332,26 +332,23 @@ public class C02_060423 extends TestBase {
         8. Sectiginiz urunun basarili olarak sepete eklendigini control edin
         9. Sayfayi kapatin
          */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        driver.get("https://www.saucedemo.com");
+        WebElement userName = driver.findElement(By.xpath("//*[@id='user-name']"));
+        userName.sendKeys("standard_user",Keys.ENTER);
+        Thread.sleep(3000);
+        WebElement password = driver.findElement(By.xpath("//*[@id='password']"));
+        password.sendKeys("secret_sauce",Keys.ENTER);
+        Thread.sleep(3000);
+        driver.findElement(By.cssSelector("input[id='login-button']")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//*[text()='Sauce Labs Backpack']")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//*[@id='add-to-cart-sauce-labs-backpack']")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.cssSelector("a[class='shopping_cart_link']")).click();
+       String sepettekiÜrün = driver.findElement(By.xpath("//*[@class='inventory_item_name']")).getText();
+       String sectigimUrun =driver.findElement(By.xpath("//*[text()='Sauce Labs Backpack']")).getText();
+       Assert.assertEquals(sectigimUrun,sepettekiÜrün);
     }
 
     @Test
