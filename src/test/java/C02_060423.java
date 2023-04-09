@@ -1,10 +1,25 @@
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 import utilities.TestBase;
 
 import java.util.Set;
+
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import utilities.TestBase;
+
+import java.time.Duration;
+import java.util.List;
+
 
 public class C02_060423 extends TestBase {
     /*
@@ -35,24 +50,12 @@ public class C02_060423 extends TestBase {
         5. “Add/Remove Elements” yazisinin gorunur oldugunu test edin
          */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
+        driver.findElement(By.xpath("//button[@onclick='addElement()']")).click();
+        WebElement delete=driver.findElement(By.xpath("//button[@class='added-manually']"));
+        Assert.assertTrue(delete.isDisplayed());
+        delete.click();
+        Assert.assertTrue(driver.findElement(By.xpath("//h3")).isDisplayed());
 
 
 
@@ -67,33 +70,33 @@ public class C02_060423 extends TestBase {
 
     @Test
     public void MustafaTest() { //62-103
-        /*
-        2- https://www.amazon.com/ adresine gidin 3- Browseri tam sayfa yapin
-        4.- Sayfayi “refresh” yapin
-        5. Sayfa basliginin “Spend less” ifadesi icerdigini test edin
-        6. Gift Cards sekmesine basin
-        7. Birthday butonuna basin
-        8. Best Seller bolumunden ilk urunu tiklayin
-        9. Gift card details’den 25 $’i secin
-        10-Urun ucretinin 25$ oldugunu test edin 10-Sayfayi kapatin
-         */
 
+//
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        //2- https://www.amazon.com/ adresine gidin
+        driver.get("https://www.amazon.com/");
+        // 3- Browseri tam sayfa yapin
+        driver.manage().window().maximize();
+//        4.- Sayfayi “refresh” yapin
+      driver.navigate().refresh();
+//        5. Sayfa basliginin “Spend less” ifadesi icerdigini test edin
+      boolean title=  driver.getTitle().contains("Spend less");
+        Assert.assertTrue(title);
+      //        6. Gift Cards sekmesine basin
+        driver.findElement(By.xpath("(//a[@class='nav-a  '])[4]")).click();
+//        7. Birthday butonuna basin
+        driver.findElement(By.xpath("//img[@alt='Birthday']")).click();
+//        8. Best Seller bolumunden ilk urunu tiklayin
+        driver.findElement(By.xpath("(//span[@class='a-truncate a-size-base'])[1]")).click();
+//        9. Gift card details’den 25 $’i secin
+        driver.findElement(By.xpath("//button[@id='gc-mini-picker-amount-1']")).click();
+//        10-Urun ucretinin 25$ oldugunu test edin 10-Sayfayi kapatin
+        String price=   driver.findElement(By.xpath("//*[@id='gc-live-preview-amount']")).getText();
+        Assert.assertTrue(price.contains("$25"));
+        driver.close();
 
 
 
@@ -157,38 +160,56 @@ public class C02_060423 extends TestBase {
         5. Ilk urunu tiklayalim
         6. Sayfadaki tum basliklari yazdiralim
          */
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.get("https://amazon.com");
+        WebElement searchBox = driver.findElement(By.xpath("//*[@id='twotabsearchtextbox']"));
+        searchBox.sendKeys("Samsung headphones", Keys.ENTER);
+        String a=driver.findElement(By.xpath("//span[text()='1-16 von 200 Ergebnissen oder Vorschlägen für']")).getText();
+        System.out.println(a.split(" ")[2]);
+        driver.findElement(By.xpath("(//span[@class='a-size-medium a-color-base a-text-normal'])[1]")).click();
+        System.out.println("Title=" +driver.getTitle());// sayfa basligi
+        List<WebElement> h1=driver.findElements(By.xpath("//h1"));//sayfadaki butun h1 basliklari
+        // --h2,h3,h4,h5 icin de ayni islem yapilabilir
+        for (WebElement webElement : h1) {
+            System.out.println(webElement.getText());
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        driver.close();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Test
     public void hamitTest() { //187-230
@@ -206,46 +227,64 @@ public class C02_060423 extends TestBase {
          */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
-    @Test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @Test
     public void remziyeTest() { //232-272
-        /*
-        2- https://www.google.com/ adresine gidin
-        3- cookies uyarisini kabul ederek kapatin
-        4.Sayfa basliginin “Google” ifadesi icerdigini test edin
-        5. Arama cubuguna “Nutella” yazip aratin
-        6. Bulunan sonuc sayisini yazdirin
-        7. sonuc sayisinin 10 milyon’dan fazla oldugunu test edin
-        8. Sayfayi kapatin
-         */
+    /*      1- https://www.google.com/ adresine gidin
+            2- cookies uyarisini kabul ederek kapatin
+            3.Sayfa basliginin “Google” ifadesi icerdigini test edin
+            4. Arama cubuguna “Nutella” yazip aratin
+            5. Bulunan sonuc sayisini yazdirin
+            6. sonuc sayisinin 10 milyon’dan fazla oldugunu test edin
+
+            */
+
+            //      1- https://www.google.com/ adresine gidin
+            driver.get("https://www.google.com/");
+            //      2- cookies uyarisini kabul ederek kapatin
+            driver.findElement(By.xpath("//*[text()='Alle ablehnen']")).click();
+            //      3.Sayfa basliginin “Google” ifadesi icerdigini test edin
+            String actualTitle = driver.getTitle();
+            Assert.assertTrue(actualTitle.contains("Google"));
+            //       4. Arama cubuguna “Nutella” yazip aratin
+            WebElement aramaKutusu = driver.findElement(By.xpath("//*[@name ='q']"));
+            aramaKutusu.sendKeys("nutella" + Keys.ENTER);
+            //     5. Bulunan sonuc sayisini yazdirin
+            String sonucYazisi = driver.
+                    findElement(By.xpath("//div[@id ='result-stats']")).getText();
+            System.out.println("sonucYazisi = " + sonucYazisi);
+
+//       6. sonuc sayisinin 10 milyon’dan fazla oldugunu test edin
+            sonucYazisi = sonucYazisi.split(" ")[1];
+            sonucYazisi = sonucYazisi.replaceAll("\\D", "");
+            System.out.println("noktasiz String sonuc" + sonucYazisi);//noktalar sorun olusturur karsilastirmada yokettik
+            int sonuc = Integer.parseInt(sonucYazisi);
+            System.out.println("int'e dönusmus sonuc; " + sonuc);
+            Assert.assertTrue(sonuc > 10000000);
+
+        }
 
 
 
@@ -275,7 +314,10 @@ public class C02_060423 extends TestBase {
 
 
 
-    }
+
+
+
+
 
     @Test
     public void kübraTest() { //274-316
@@ -310,19 +352,10 @@ public class C02_060423 extends TestBase {
 
 
 
-
-
-
-
-
-
-
-
-
     }
 
     @Test
-    public void sevilTest() { //318-356
+    public void sevilTest() throws InterruptedException { //318-356
         /*
         a. Verilen web sayfasına gidin.
         https://the-internet.herokuapp.com/checkboxes
@@ -330,24 +363,24 @@ public class C02_060423 extends TestBase {
         c. Checkbox1 seçili değilse onay kutusunu tıklayın
         d. Checkbox2 seçili değilse onay kutusunu tıklayın
          */
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+
+        driver.get("https://the-internet.herokuapp.com/checkboxes");
+        Thread.sleep(3000);
+        WebElement checkout1 = driver.findElement(By.xpath("// input [@type='checkbox'][1]"));
+        WebElement checkout2 = driver.findElement(By.xpath("// input [@type='checkbox'][2]"));
+        if (!checkout1.isSelected()) {
+            checkout1.click();
+        }
+        if (!checkout2.isSelected()) {
+            checkout2.click();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
 
