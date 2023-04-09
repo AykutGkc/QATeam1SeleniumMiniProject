@@ -237,37 +237,37 @@ public class C03_090423 extends TestBase {
 
     }
 
+
     @Test
     public void remziye() { //241-271
         //➢ https://testcenter.techproeducation.com/index.php?page=iframe
-        //➢ Ana sayfadaki ‘An iframe with a thin black border:’ metninde ‘black border’ yazisinin oldugunu test edelim
+        //➢ Ana sayfadaki ‘An iframe with a thin black border:’ metninde ‘black
+        // border’ yazisinin oldugunu test edelim
         //➢ Ayrica ‘Applications lists’ yazisinin sayfada oldugunu test edelim
         //➢ Son olarak footer daki ‘Povered By’ yazisini varligini test edilip
 
 
+        //➢ https://testcenter.techproeducation.com/index.php?page=iframe
+driver.get("https://testcenter.techproeducation.com/index.php?page=iframe");
 
+        //➢ Ana sayfadaki ‘An iframe with a thin black border:’ metninde ‘black
+        // border’ yazisinin oldugunu test edelim
+String actualText=driver.findElement(By.xpath
+  ("//p[text() = 'An iframe with a thin black border:']")).getText();
+String expected = "black border";
+Assert.assertTrue(actualText.contains(expected));
 
+        //➢ Ayrica ‘Applications lists’ yazisinin sayfada oldugunu test edelim
+driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+String actualText2=driver.findElement
+        (By.cssSelector("h1[class='display-5 fw-bold']")).getText();
+String expected2="Applications lists";
+Assert.assertEquals(expected2,actualText2);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//➢ Son olarak footer daki ‘Povered By’ yazisini varligini test edilip
+        driver.switchTo().defaultContent();
+        WebElement poveredByYazisi = driver.findElement(By.xpath("//*[text()='Povered By']"));
+        Assert.assertTrue(poveredByYazisi.getText().contains("Povered By"));
     }
 
     @Test
