@@ -3,6 +3,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebElement;
+import utilities.TestBase;
+
+import java.util.Set;
+
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +19,7 @@ import utilities.TestBase;
 
 import java.time.Duration;
 import java.util.List;
+
 
 public class C02_060423 extends TestBase {
     /*
@@ -386,14 +395,28 @@ public class C02_060423 extends TestBase {
     }
 
     @Test
-    public void ömerTest() { //358-396
-        /*
-        - https://www.facebook.com adresine gidin
-        - Cookies’i kabul edin
-        - “Create an Account” button’una basin
-        - “radio buttons” elementlerini locate edin
-        - Secili degilse cinsiyet butonundan size uygun olani secin
-         */
+    public void ömerTest() throws InterruptedException { //358-396
+
+//        - https://www.facebook.com adresine gidin
+        driver.get("https://www.facebook.com");
+
+        Thread.sleep(3);
+//        - Cookies’i kabul edin
+        driver.findElement(By.xpath("//*[@class='_42ft _4jy0 _9xo7 _4jy3 _4jy1 selected _51sy']")).click();
+
+//        - “Create an Account” button’una basin
+        driver.findElement(By.id("u_0_0_1K")).click();
+//        - “radio buttons” elementlerini locate edin
+        WebElement einsRadioButton = driver.findElement(By.xpath("//*[@id='u_3_4_qG']"));
+        WebElement zweiRadioButton = driver.findElement(By.xpath("//*[@id='u_2_5_XR']"));
+        WebElement drieRadioButton = driver.findElement(By.xpath("//*[@id='u_2_6_41']"));
+
+//        - Secili degilse cinsiyet butonundan size uygun olani secin
+        if (!drieRadioButton.isSelected()){
+            drieRadioButton.click();
+        }
+
+
 
 
 
