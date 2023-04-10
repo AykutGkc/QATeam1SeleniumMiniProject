@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import utilities.TestBase;
 
 import java.util.Set;
@@ -91,7 +92,13 @@ public class C03_090423 extends TestBase {
         //- Test 1
         //Arama kutusunun yanindaki kategori menusundeki kategori sayisinin 45
         //oldugunu test edin
-
+        driver.get("https://www.amazon.com/");
+        WebElement dropDown = driver.findElement(By.xpath("//*[@id='searchDropdownBox']"));
+        Select select = new Select(dropDown);
+        List<WebElement> kategoriList = select.getOptions();
+        int actualList = kategoriList.size();
+        int expectedList=45;
+        Assert.assertEquals(expectedList,actualList);
 
 
 
