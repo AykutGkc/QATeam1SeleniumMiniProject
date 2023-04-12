@@ -121,9 +121,17 @@ public class C03_090423 extends TestBase {
     @Test
     public void gül() { //122-152
         //● https://www.amazon.com/ adresine gidin.
-        //1.Kategori menusunden Books secenegini secin 2. Arama kutusuna Java yazin ve aratin
+        //1.Kategori menusunden Books secenegini secin
+        // 2. Arama kutusuna Java yazin ve aratin
         //3. Bulunan sonuc sayisini yazdirin
         //4. Sonucun Java kelimesini icerdigini test edin
+        driver.get("https://www.amazon.com/ ");
+        WebElement ddmlocate=driver.findElement(By.id("searchDropdownBox"));
+        ddmVisibletext(ddmlocate,"Bücher");
+        driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Java", Keys.ENTER);
+        String sonucyazisi= driver.findElement(By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']")).getText();
+        System.out.println(sonucyazisi);
+        Assert.assertTrue(sonucyazisi.contains("Java"));
 
 
 
@@ -145,11 +153,7 @@ public class C03_090423 extends TestBase {
 
 
 
-
-
-
-
-    }
+        }
 
     @Test
     public void nihat() { //155-205
