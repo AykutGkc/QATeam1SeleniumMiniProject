@@ -53,35 +53,35 @@ public class C03_090423 extends TestBase {
 
     }
 
+
     @Test
-    public void mustafa() { //56-86
-        //2. http://automationpractice.com/index.php sayfasina gidelim
-        //3. Sign in butonuna basalim
-        //4. Email kutusuna @isareti olmayan bir mail yazip enter’a bastigimizda
-        // “Invalid email address” uyarisi ciktigini test edelim
+   public void mustafa() { //56-86
+        //automationexercise.com test 2 login true information
+        //    2. Navigate to url 'http://automationexercise.com'
+        driver.get("http://automationexercise.com");
+        //3. Verify that home page is visible successfully
+        WebElement mainManuLogo = driver.findElement(By.xpath("//div[@class='logo pull-left']"));
+        Assert.assertTrue(mainManuLogo.isDisplayed());
+        //4. Click on 'Signup / Login' button
+        driver.findElement(By.xpath("//*[text()=' Signup / Login']")).click();
 
+        //5. Verify 'Login to your account' is visible
+        WebElement loginText = driver.findElement(By.xpath("//h2[text()='Login to your account']"));
+        Assert.assertTrue(loginText.isDisplayed());
+        //6. Enter correct email address and password
+        driver.findElement(By.xpath("//*[@type='email']")).sendKeys("a912@gmail.com");
+        waitWithThreadSleep(2);
+        driver.findElement(By.xpath("//*[@type='password']")).sendKeys("12345");
+      waitWithThreadSleep(2);
+        //7. Click 'login' button
+        driver.findElement(By.xpath("(//*[@type='submit'])[1]")).click();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //8. Verify that 'Logged in as username' is visible
+        WebElement loggedText = driver.findElement(By.xpath("(//a)[11]"));
+        String StrLoggedText = loggedText.getText();
+        String expectedText = "Logged in as Ali";
+        Assert.assertTrue(StrLoggedText.contains(expectedText));
+        Assert.assertTrue(loggedText.isDisplayed());
 
 
     }
