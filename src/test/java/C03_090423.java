@@ -24,21 +24,23 @@ public class C03_090423 extends TestBase {
     @Test
     public void aykut() { //25-55
         //2) https://www.youtube.com adresine gidin
+        driver.get("https://www.youtube.com");
         //Sayfa başlığının “YouTube” oldugunu test edin
+        String youtubeTitle=driver.getTitle();
+        Assert.assertTrue(youtubeTitle.contains("YouTube"));
         //=> YouTube resminin görüntülendiğini (isDisplayed()) test edin
+        waitWithThreadSleep(3);
+        WebElement cookiesAccept= driver.findElement(By.xpath("(//div[@class='yt-spec-touch-feedback-shape yt-spec-touch-feedback-shape--touch-response-inverse'])[2]"));
+        cookiesAccept.click();
+
+        WebElement youtubeLogo=driver.findElement(By.xpath("(//a[@class='yt-simple-endpoint style-scope ytd-topbar-logo-renderer'])[1]"));
+        Assert.assertTrue(youtubeLogo.isDisplayed());
+
         //○ Search Box 'in erisilebilir oldugunu test edin (isEnabled())
+        WebElement searchBox=driver.findElement(By.xpath("//input[@id='search']"));
+        Assert.assertTrue(searchBox.isEnabled());
         //○ wrongTitleTest => Sayfa basliginin “youtube” olmadigini dogrulayin
-
-
-
-
-
-
-
-
-
-
-
+        Assert.assertFalse(youtubeTitle.contains("youtube"));
 
 
 
