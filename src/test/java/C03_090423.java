@@ -165,7 +165,9 @@ public class C03_090423 extends TestBase {
     @Test
     public void nihat() { //155-205
         //1.http://zero.webappsecurity.com/ Adresine gidin 2. Sign in butonuna basin
+        driver.get("http://zero.webappsecurity.com/");
         //3. Login kutusuna “username” yazin
+        driver.findElement(By.id("searchTerm")).sendKeys("username");
         //4. Password kutusuna “password.” yazin
         //5. Sign in tusuna basin
         //6. Pay Bills sayfasina gidin
