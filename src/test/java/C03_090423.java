@@ -152,13 +152,24 @@ public class C03_090423 extends TestBase {
     }
 
     @Test
-    public void nihat() { //155-205
+    public void nihat() throws InterruptedException { //155-205
         //1.http://zero.webappsecurity.com/ Adresine gidin 2. Sign in butonuna basin
         driver.get("http://zero.webappsecurity.com/");
+        Thread.sleep(2000);
+
+        driver.findElement(By.id("signin_button")).click();
+        Thread.sleep(2000);
+
         //3. Login kutusuna “username” yazin
-        driver.findElement(By.id("searchTerm")).sendKeys("username");
+       driver.findElement(By.xpath("//input[@id='user_login']")).sendKeys("username");
+
         //4. Password kutusuna “password.” yazin
+        driver.findElement(By.xpath("//input[@id='user_password']")).sendKeys("password.");
+        Thread.sleep(2000);
+
         //5. Sign in tusuna basin
+        driver.findElement(By.xpath("//*[@value='Sign in']")).click();
+
         //6. Pay Bills sayfasina gidin
         //7. “Purchase Foreign Currency” tusuna basin
         //8. “Currency” drop down menusunden Eurozone’u secin
