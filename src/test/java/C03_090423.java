@@ -152,17 +152,7 @@ public class C03_090423 extends TestBase {
 
 
 
-
-
-
-
-
-
-
-
-
-
-        }
+    }
 
     @Test
     public void nihat() throws InterruptedException { //155-205
@@ -174,14 +164,15 @@ public class C03_090423 extends TestBase {
         Thread.sleep(2000);
 
         //3. Login kutusuna “username” yazin
-       driver.findElement(By.xpath("//input[@id='user_login']")).sendKeys("username");
+       driver.findElement(By.xpath("//input[@id='user_login']")).sendKeys("usernamee");
 
         //4. Password kutusuna “password.” yazin
-        driver.findElement(By.xpath("//input[@id='user_password']")).sendKeys("password.");
+        driver.findElement(By.xpath("//input[@id='user_password']")).sendKeys("password..");
         Thread.sleep(2000);
 
         //5. Sign in tusuna basin
-        driver.findElement(By.xpath("//*[@value='Sign in']")).click();
+        driver.findElement(By.xpath("//*[@class='btn btn-primary']")).click();
+
 
         //6. Pay Bills sayfasina gidin
         //7. “Purchase Foreign Currency” tusuna basin
@@ -191,23 +182,6 @@ public class C03_090423 extends TestBase {
         //11.“Selected currency” butonunu secin
         //12.“Calculate Costs” butonuna basin sonra “purchase” butonuna basin 13.“Foreign currency cash was successfully purchased.” yazisinin ciktigini
         //kontrol edin.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
